@@ -27,4 +27,15 @@ function getBiographyById(id:number){
      return lista.find(person => person.id == id)?.bio;
 }
 
+/*
+  This function returns a person's name via their id
+  Params: 1;
+  Type: number;
+  return: name of the person that id was passed by params;   
+*/
+function getNameById(id:number){
+     return lista.find(person => person.id == id)?.name;
+}
+
 console.log(getBiographyById(2));
+console.log(getNameById(2));
