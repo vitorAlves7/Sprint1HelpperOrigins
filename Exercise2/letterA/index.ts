@@ -1,7 +1,7 @@
 class Person {
      id:number;
-     bio: string;
      name: string;
+     bio: string;
      constructor(id:number,name:string,bio:string){
           this.id = id;
           this.name = name;
@@ -23,8 +23,23 @@ let lista: Array<Person> = [
   Type: number;
   return: bibliography of the person that id was passed by params;   
 */
-function getBiographyById(id:number){
-     return lista.find(person => person.id == id)?.bio;
+function getBiographyByIdFunctional(id:number) : string {
+     return lista.find(person => person.id == id)?.bio as string;
+}
+
+/*
+  This function returns a person's bibliography via their id
+  Params: 1;
+  Type: number;
+  return: bibliography of the person that id was passed by params;   
+*/
+function getBiographyById(id:number) : string {
+     for(let person of lista){
+          if(person.id === id){
+               return person.bio as string;
+          }
+     }
+     return 'Pessoa não encontrada';
 }
 
 /*
@@ -33,9 +48,99 @@ function getBiographyById(id:number){
   Type: number;
   return: name of the person that id was passed by params;   
 */
-function getNameById(id:number){
-     return lista.find(person => person.id == id)?.name;
+function getNameByIdFunctional(id:number) : string {
+     return lista.find(person => person.id == id)?.name as string;
 }
 
+/*
+  This function returns a person's name via their id
+  Params: 1;
+  Type: number;
+  return: name of the person that id was passed by params;   
+*/
+function getNameById(id:number) : string {
+     for(let person of lista){
+          if(person.id === id){
+               return person.name as string;
+          }
+     }
+     return 'Pessoa não encontrada';
+}
+
+/*
+  This function delete a person that id was passed by params
+  Params: 1;
+  Type: number;
+  return: void;   
+*/
+function deletePersonByIdFunctional(id:number) : void {
+     return lista.forEach((person,index) =>{
+          if(person.id === id){
+               lista.splice(index,1);
+          }
+     });
+}
+
+/*
+  This function delete a person that id was passed by params
+  Params: 1;
+  Type: number;
+  return: void;   
+*/
+function deletePersonById(id:number) : void {
+    for(let i = 0;  i < lista.length; i++){
+          if(id === lista[i].id){
+               lista.splice(i,1);
+          }
+    } 
+}
+/*
+     This function changes a person's name or bio in the array
+     Parmans:3
+     Types: number, string,string
+     return void;
+*/
+function changeAPesonBioFunctional(id:number, option:string, newValue:string) : void {
+    lista.forEach((person,index) =>{
+     if(person.id === id){
+          if(option === "name"){
+               lista[index].name = newValue;
+          } else if(option === "bio"){
+               lista[index].bio = newValue;
+          } 
+     }               
+     });
+     
+}
+
+/*
+     This function changes a person's name or bio in the array
+     Parmans:3
+     Types: number, string,string
+     return void;
+*/
+
+function changeAPesonBio(id:number, option:string, newValue:string) : void {
+     for(let person of lista){
+          if(person.id === id){
+               if(option === "name"){
+                    person.name = newValue;
+               } else if(option === "bio") {
+                    person.bio = newValue;
+               }
+          }
+     }
+}
+//Examples
+console.log(getBiographyByIdFunctional(1));
 console.log(getBiographyById(2));
-console.log(getNameById(2));
+console.log(getNameByIdFunctional(4));
+console.log(getNameByIdFunctional(3));
+changeAPesonBioFunctional(2,"bio","Bio changed");
+console.log(lista);
+changeAPesonBio(1,"name","pedro");
+console.log(lista);
+deletePersonById(1);
+console.log(lista);
+deletePersonByIdFunctional(2);
+console.log(lista)
