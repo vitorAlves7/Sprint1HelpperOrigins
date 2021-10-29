@@ -24,7 +24,7 @@ let lista: Array<Person> = [
   return: bibliography of the person that id was passed by params;   
 */
 function getBiographyByIdFunctional(id:number) : string {
-     return lista.find(person => person.id == id)?.bio as string;
+     return lista.find((person: Person) => person.id === id)?.bio as string;
 }
 
 /*
@@ -49,7 +49,7 @@ function getBiographyById(id:number) : string {
   return: name of the person that id was passed by params;   
 */
 function getNameByIdFunctional(id:number) : string {
-     return lista.find(person => person.id == id)?.name as string;
+     return lista.find((person: Person) => person.id === id)?.name as string;
 }
 
 /*
@@ -74,7 +74,7 @@ function getNameById(id:number) : string {
   return: void;   
 */
 function deletePersonByIdFunctional(id:number) : void {
-     return lista.forEach((person,index) =>{
+     return lista.forEach((person: Person,index: number) =>{
           if(person.id === id){
                lista.splice(index,1);
           }
@@ -101,7 +101,7 @@ function deletePersonById(id:number) : void {
      return void;
 */
 function changeAPesonBioFunctional(id:number, option:string, newValue:string) : void {
-     let person : Person = lista.find(person => person.id === id) as Person;
+     let person : Person = lista.find((person: Person) => person.id === id) as Person;
      if(option === "name"){
           person.name = newValue;
      } else if(option === "bio"){
