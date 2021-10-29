@@ -102,21 +102,20 @@ function deletePersonById(id:number) : void {
 */
 function changeAPesonBioFunctional(id:number, option:string, newValue:string) : void {
     lista.forEach((person,index) =>{
-     if(person.id === id){
-          if(option === "name"){
-               lista[index].name = newValue;
-          } else if(option === "bio"){
-               lista[index].bio = newValue;
-          } 
-     }               
+          if(person.id === id){
+               if(option === "name"){
+                    lista[index].name = newValue;
+               } else if(option === "bio"){
+                    lista[index].bio = newValue;
+               } 
+          }               
      });
-     
 }
 
 /*
      This function changes a person's name or bio in the array
-     Parmans:3
-     Types: number, string,string
+     Parmans:3;
+     Types: number, string,string;
      return void;
 */
 
