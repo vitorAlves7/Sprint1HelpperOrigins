@@ -101,15 +101,12 @@ function deletePersonById(id:number) : void {
      return void;
 */
 function changeAPesonBioFunctional(id:number, option:string, newValue:string) : void {
-    lista.forEach((person,index) =>{
-          if(person.id === id){
-               if(option === "name"){
-                    lista[index].name = newValue;
-               } else if(option === "bio"){
-                    lista[index].bio = newValue;
-               } 
-          }               
-     });
+     let person : Person = lista.find(person => person.id === id) as Person;
+     if(option === "name"){
+          person.name = newValue;
+     } else if(option === "bio"){
+          person.bio = newValue;
+     } 
 }
 
 /*
