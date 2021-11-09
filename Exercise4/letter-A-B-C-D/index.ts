@@ -185,42 +185,29 @@ function deletePersonFromTheTable(id: number): void{
      formPeople.innerHTML = ``;
 }
 
-// function modifyText() {
-//   var t2 = document.getElementById("cta");
-//   t2.firstChild.nodeValue = "three";
-// }
+function editFormPerson(id: number,option: string) : void {
+     let input: HTMLInputElement = document.querySelector(`#${option}`)as HTMLInputElement;
+     let textValue = input.value;
+     changeAPesonBioFunctional(id, option, textValue);
+     let allPeople : string = renderTable(lista) as string;
+     tableOfPeople.innerHTML = allPeople as string;
+     formPeople.innerHTML = ``;
+
+}
+
 
 let formPeople : HTMLElement = document.getElementById('formPeople') as HTMLElement;
 function renderForm(id : number): void{
     formPeople.innerHTML = ` <h1>Alterar dados</h1>
-    <form id="formName" name="formName" onsubmit="validateForm(${id},getNameByIdFunctional)">
+    <form id="formName" name="formName" onsubmit="editFormPerson(${id},'name')">
         <label for="fname"><b>Nome da pessoa:</b></br>${getNameByIdFunctional(id)}</label><br>
-        <input type="text" id="fname" name="fname">
+        <input type="text" id="name" name="fname">
         <input type="submit" value="Mudar nome"></br>
     </form>
-    <form id="formBio>  
-        <label for="lname"><b>Bio da Pessoa:</b></br>${getBiographyByIdFunctional(id)}</label><br>
-        <input type="text" id="lname" name="lname">
+    <form id="formBio" name="formBio" onsubmit="editFormPerson(${id},'bio')">  
+        <label for="fbio"><b>Bio da Pessoa:</b></br>${getBiographyByIdFunctional(id)}</label><br>
+        <input type="text" id="bio" name="fbio">
         <input type="submit" value="Mudar Bio">
     </form>`
-
 }
 
-// function validateForm(id: number,name:string) {
-//   let x = document.forms["formName"]["fname"].value;
-//   if (x == "") {
-//     alert("Name must be filled out");
-//     return false;
-//   } else {
-//      changeAPesonBioFunctional(id,'name',x); 
-//   }
-// }
-
-const formName : HTMLElement = document.getElementById('formName') as HTMLElement;
-
-formName.addEventListener('submit', (event) =>{ 
-    console.log(event)
-});
-
-
-let cta : HTMLElement = document.getElementById("cta") as HTMLElement;
