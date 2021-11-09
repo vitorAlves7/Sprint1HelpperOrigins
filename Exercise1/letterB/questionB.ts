@@ -25,7 +25,6 @@ function numberOfVowels(valueWord: string) : number{
 
 function responseVowels(){
     vowels.textContent = numberOfVowels(word.value).toString();
-
 }
 
 document.addEventListener('input', responseVowels);

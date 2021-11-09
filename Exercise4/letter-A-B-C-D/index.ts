@@ -151,22 +151,38 @@ let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HT
 let allPeople : string = renderTable(lista) as string;
 tableOfPeople.innerHTML = allPeople as string;
 
-
 function renderTable(people: Person []) : string {
   let rows = people.map((person: Person) => {
-    return `<tr>
-                <td>${person.id}</td>
-                <td>${person.name}</td><td>${person.bio}</td>
-                <td><a href="#form${person.id}" type="button" id="cta" onClick="renderForm(${person.id});">Alterar dados de ${person.name}</a><td>
-            </tr>`;
+    return createTableLine(person.id, person.name, person.bio);
   });	
+  return createTableHeader(rows);
+}
+
+function createTableLine(id: number, name: string, bio: string) : string{
+     return`<tr id="${id}">
+               <td>${id}</td>
+               <td>${name}</td><td>${bio}</td>
+               <td><a href="#form${id}" type="button" id="edit-person-${id}" onClick="renderForm(${id});">Alterar dados de ${name}</a><td>
+               <td><a href="#" type="button" id="delete-person-${id}" onClick="deletePersonFromTheTable(${id});">Deletar dados ${name}</a><td>
+          </tr>`;
+}
+
+function createTableHeader(rows : string []) : string{ 
   return`<table>
             <tr><td><b>Id</b></td>
             <td><b>Name</b></td>
             <td><b>Bio</b></td>
-            <td><b>CTA</b></td></tr>
+            <td><b>Editar</b></td>
+            <td><b>Deletar</b></td></tr>
             ${rows.join("")}
         </table>`;
+}
+
+function deletePersonFromTheTable(id: number): void{
+     deletePersonByIdFunctional(id);
+     let allPeople : string = renderTable(lista) as string;
+     tableOfPeople.innerHTML = allPeople as string;
+     formPeople.innerHTML = ``;
 }
 
 // function modifyText() {
@@ -190,15 +206,15 @@ function renderForm(id : number): void{
 
 }
 
-function validateForm(id: number,name:string) {
-  let x = document.forms["formName"]["fname"].value;
-  if (x == "") {
-    alert("Name must be filled out");
-    return false;
-  } else {
-     changeAPesonBioFunctional(id,'name',x); 
-  }
-}
+// function validateForm(id: number,name:string) {
+//   let x = document.forms["formName"]["fname"].value;
+//   if (x == "") {
+//     alert("Name must be filled out");
+//     return false;
+//   } else {
+//      changeAPesonBioFunctional(id,'name',x); 
+//   }
+// }
 
 const formName : HTMLElement = document.getElementById('formName') as HTMLElement;
 
