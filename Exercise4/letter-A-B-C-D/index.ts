@@ -138,15 +138,73 @@ function changeAPesonBio(id:number, option:string, newValue:string) : void {
      }
 }
 
-let app : HTMLElement = document.getElementById('app') as HTMLElement;
 
-let tableOfPeople = renderTable(lista);
-app.innerHTML = tableOfPeople;
-console.log(tableOfPeople);
+/*
+===========================
+|   Exercise 4 code       |
+===========================
+*/
+
+
+let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
+
+let allPeople : string = renderTable(lista) as string;
+tableOfPeople.innerHTML = allPeople as string;
+
 
 function renderTable(people: Person []) : string {
   let rows = people.map((person: Person) => {
-    return `<tr><td>${person.id}</td><td>${person.name}</td><td>${person.bio}</td></tr>`;
+    return `<tr>
+                <td>${person.id}</td>
+                <td>${person.name}</td><td>${person.bio}</td>
+                <td><a href="#form${person.id}" type="button" id="cta" onClick="renderForm(${person.id});">Alterar dados de ${person.name}</a><td>
+            </tr>`;
   });	
-  return `<table>${rows.join("")}</table>`;
+  return`<table>
+            <tr><td><b>Id</b></td>
+            <td><b>Name</b></td>
+            <td><b>Bio</b></td>
+            <td><b>CTA</b></td></tr>
+            ${rows.join("")}
+        </table>`;
 }
+
+// function modifyText() {
+//   var t2 = document.getElementById("cta");
+//   t2.firstChild.nodeValue = "three";
+// }
+
+let formPeople : HTMLElement = document.getElementById('formPeople') as HTMLElement;
+function renderForm(id : number): void{
+    formPeople.innerHTML = ` <h1>Alterar dados</h1>
+    <form id="formName" name="formName" onsubmit="validateForm(${id},getNameByIdFunctional)">
+        <label for="fname"><b>Nome da pessoa:</b></br>${getNameByIdFunctional(id)}</label><br>
+        <input type="text" id="fname" name="fname">
+        <input type="submit" value="Mudar nome"></br>
+    </form>
+    <form id="formBio>  
+        <label for="lname"><b>Bio da Pessoa:</b></br>${getBiographyByIdFunctional(id)}</label><br>
+        <input type="text" id="lname" name="lname">
+        <input type="submit" value="Mudar Bio">
+    </form>`
+
+}
+
+function validateForm(id: number,name:string) {
+  let x = document.forms["formName"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  } else {
+     changeAPesonBioFunctional(id,'name',x); 
+  }
+}
+
+const formName : HTMLElement = document.getElementById('formName') as HTMLElement;
+
+formName.addEventListener('submit', (event) =>{ 
+    console.log(event)
+});
+
+
+let cta : HTMLElement = document.getElementById("cta") as HTMLElement;

@@ -158,6 +158,6 @@ function returnTheAverageOfTheNumbersInArrayFunctional(numberList: number []): n
 const numberList : number []  = [5,2,3,5,8];
 const anyList : any [] = [5,'dell',4,true];
 
-console.log(main(numberList));
+console.log(main(anyList));
 console.log(mainFunctional(numberList))
 
