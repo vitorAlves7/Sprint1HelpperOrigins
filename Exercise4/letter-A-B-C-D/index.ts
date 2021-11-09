@@ -145,7 +145,10 @@ function changeAPesonBio(id:number, option:string, newValue:string) : void {
 ===========================
 */
 
-loadTable();
+let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
+let allPeople : string = renderTable(lista) as string;
+tableOfPeople.innerHTML = allPeople as string;
+
 
 /*
      This function loads a table in the HTML body
@@ -154,7 +157,7 @@ loadTable();
      return:  void;
 */
 
-function loadTable(): void{
+function loadTable(lista: Person[]): void{
      let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
      
      let allPeople : string = renderTable(lista) as string;
@@ -165,7 +168,7 @@ function loadTable(): void{
      This function create the table with all people from a person list
      Parmans:1;
      Types: People [];
-     return: return A HTML people table ;;
+     return: return A HTML people table ;
 */
 
 function renderTable(people: Person []) : string {
@@ -219,7 +222,10 @@ function createTableHeader(rows : string []) : string{
 
 function deletePersonFromTheTable(id: number): void{
      deletePersonByIdFunctional(id);
-     loadTable();
+     let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
+     let allPeople : string = renderTable(lista) as string;
+     tableOfPeople.innerHTML = allPeople as string;
+     formPeople.innerHTML = ``;
 }
 
 /*
@@ -233,7 +239,10 @@ function editFormPerson(id: number,option: string) : void {
      let input: HTMLInputElement = document.querySelector(`#${option}`)as HTMLInputElement;
      let textValue = input.value;
      changeAPesonBioFunctional(id, option, textValue);
-     loadTable();
+     let allPeople : string = renderTable(lista) as string;
+     tableOfPeople.innerHTML = allPeople as string;
+     formPeople.innerHTML = ``;
+    
 }
 
 /*
@@ -242,6 +251,8 @@ function editFormPerson(id: number,option: string) : void {
      Types: number
      return  void;
 */
+
+
 
 let formPeople : HTMLElement = document.getElementById('formPeople') as HTMLElement;
 function renderForm(id : number): void{
@@ -257,4 +268,3 @@ function renderForm(id : number): void{
         <input type="submit" value="Mudar Bio">
     </form>`
 }
-
