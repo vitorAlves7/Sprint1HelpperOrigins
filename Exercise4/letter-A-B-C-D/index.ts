@@ -123,7 +123,7 @@ function changeAPesonBioFunctional(id:number, option:string, newValue:string) : 
      This function changes a person's name or bio in the array
      Parmans:3;
      Types: number, string,string;
-     return void;
+     return: void;
 */
 
 function changeAPesonBio(id:number, option:string, newValue:string) : void {
@@ -145,11 +145,28 @@ function changeAPesonBio(id:number, option:string, newValue:string) : void {
 ===========================
 */
 
+loadTable();
 
-let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
+/*
+     This function loads a table in the HTML body
+     Parmans:0;
+     Types: void;
+     return:  void;
+*/
 
-let allPeople : string = renderTable(lista) as string;
-tableOfPeople.innerHTML = allPeople as string;
+function loadTable(): void{
+     let tableOfPeople : HTMLElement = document.getElementById('tableOfPeople') as HTMLElement;
+     
+     let allPeople : string = renderTable(lista) as string;
+     tableOfPeople.innerHTML = allPeople as string;
+}
+
+/*
+     This function create the table with all people from a person list
+     Parmans:1;
+     Types: People [];
+     return: return A HTML people table ;;
+*/
 
 function renderTable(people: Person []) : string {
   let rows = people.map((person: Person) => {
@@ -157,6 +174,14 @@ function renderTable(people: Person []) : string {
   });	
   return createTableHeader(rows);
 }
+
+
+/*
+     This function creates the line of a table with person attributes
+     Parmans:3;
+     Types: number, string, string;
+     return: A person's table line ;
+*/
 
 function createTableLine(id: number, name: string, bio: string) : string{
      return`<tr id="${id}">
@@ -166,6 +191,13 @@ function createTableLine(id: number, name: string, bio: string) : string{
                <td><a href="#" type="button" id="delete-person-${id}" onClick="deletePersonFromTheTable(${id});">Deletar dados ${name}</a><td>
           </tr>`;
 }
+
+/*
+     This function create the header of a person table
+     Parmans:1;
+     Types: string [];
+     return: A header from an HTML table;
+*/
 
 function createTableHeader(rows : string []) : string{ 
   return`<table>
@@ -178,23 +210,38 @@ function createTableHeader(rows : string []) : string{
         </table>`;
 }
 
+/*
+     This function delete a table person
+     Parmans:1;
+     Types: string;
+     return  void;
+*/
+
 function deletePersonFromTheTable(id: number): void{
      deletePersonByIdFunctional(id);
-     let allPeople : string = renderTable(lista) as string;
-     tableOfPeople.innerHTML = allPeople as string;
-     formPeople.innerHTML = ``;
+     loadTable();
 }
+
+/*
+     This function edit a table person
+     Parmans:2;
+     Types: number,string;
+     return  void;
+*/
 
 function editFormPerson(id: number,option: string) : void {
      let input: HTMLInputElement = document.querySelector(`#${option}`)as HTMLInputElement;
      let textValue = input.value;
      changeAPesonBioFunctional(id, option, textValue);
-     let allPeople : string = renderTable(lista) as string;
-     tableOfPeople.innerHTML = allPeople as string;
-     formPeople.innerHTML = ``;
-
+     loadTable();
 }
 
+/*
+     This function creates a form to edit a person
+     Parmans:1;
+     Types: number
+     return  void;
+*/
 
 let formPeople : HTMLElement = document.getElementById('formPeople') as HTMLElement;
 function renderForm(id : number): void{
